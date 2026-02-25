@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrepMaster | Premium Interview Practice</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+        <div class="logo">
+            <span class="text-gradient">PREP</span>MASTER
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" id="nav-home">Home</a></li>
+                <li><a href="#" id="nav-dashboard">Categories</a></li>
+                <li><a href="#" id="nav-stats">My Progress</a></li>
+            </ul>
+        </nav>
+        <button class="btn-primary" id="start-btn-nav">Get Started</button>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="hero-section">
+            <h1>Master Your Next <br><span class="text-gradient">Technical Interview</span></h1>
+            <p>A curated collection of industry-standard questions across Frontend, Backend, and Behavioral tracks. Practice with precision.</p>
+            <button class="btn-primary" id="hero-cta">Start Practicing</button>
+        </section>
+
+        <!-- Dashboard / Category Selection -->
+        <section class="dashboard" id="dashboard-section">
+            <div class="category-card glass" data-category="frontend">
+                <i class="fab fa-react"></i>
+                <h2>Frontend Mastery</h2>
+                <p>React, JavaScript, CSS Architecture & Web Performance.</p>
+            </div>
+            <div class="category-card glass" data-category="backend">
+                <i class="fas fa-server"></i>
+                <h2>Backend Core</h2>
+                <p>System Design, Node.js, Databases & Scalability.</p>
+            </div>
+            <div class="category-card glass" data-category="behavioral">
+                <i class="fas fa-users"></i>
+                <h2>Behavioral & HR</h2>
+                <p>Soft skills, leadership, and culture-fit scenarios.</p>
+            </div>
+        </section>
+
+        <!-- Practice Environment -->
+        <section class="practice-view" id="practice-section">
+            <div class="practice-header">
+                <span id="category-label" class="text-gradient">FRONTEND</span>
+                <span class="timer" id="timer">00:00</span>
+            </div>
+            
+            <div class="question-container glass">
+                <h2 id="question-text">Loading question...</h2>
+                <p id="question-context" style="color: var(--text-muted); margin-top: 1rem;"></p>
+            </div>
+
+            <textarea class="answer-area" id="answer-input" placeholder="Type your thoughts or code here..."></textarea>
+
+            <div class="navigation-btns">
+                <button class="btn-primary" style="background: #334155;" id="prev-btn">Previous</button>
+                <div class="center-controls">
+                    <span id="question-counter" style="margin-right: 1.5rem; font-weight: 500;">1 / 10</span>
+                    <button class="btn-primary" id="submit-btn" style="background: var(--accent-pink);">Finish Session</button>
+                </div>
+                <button class="btn-primary" id="next-btn">Next Question</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
