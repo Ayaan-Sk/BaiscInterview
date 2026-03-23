@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header id="header">
         <div class="logo">
-            <span class="text-gradient">PREP</span>MASTER
+            <span class="text-gradient">INTER</span>VEO
         </div>
         <nav>
             <ul>
@@ -27,7 +29,8 @@
         <!-- Hero Section -->
         <section class="hero" id="hero-section">
             <h1>Master Your Next <br><span class="text-gradient">Technical Interview</span></h1>
-            <p>A curated collection of industry-standard questions across Frontend, Backend, and Behavioral tracks. Practice with precision.</p>
+            <p>A curated collection of industry-standard questions across Frontend, Backend, and Behavioral tracks.
+                Practice with precision.</p>
             <button class="btn-primary" id="hero-cta">Start Practicing</button>
         </section>
 
@@ -56,7 +59,7 @@
                 <span id="category-label" class="text-gradient">FRONTEND</span>
                 <span class="timer" id="timer">00:00</span>
             </div>
-            
+
             <div class="question-container glass">
                 <h2 id="question-text">Loading question...</h2>
                 <p id="question-context" style="color: var(--text-muted); margin-top: 1rem;"></p>
@@ -68,13 +71,42 @@
                 <button class="btn-primary" style="background: #334155;" id="prev-btn">Previous</button>
                 <div class="center-controls">
                     <span id="question-counter" style="margin-right: 1.5rem; font-weight: 500;">1 / 10</span>
-                    <button class="btn-primary" id="submit-btn" style="background: var(--accent-pink);">Finish Session</button>
+                    <button class="btn-primary" id="submit-btn" style="background: var(--accent-pink);">Finish
+                        Session</button>
                 </div>
                 <button class="btn-primary" id="next-btn">Next Question</button>
+            </div>
+        </section>
+        <!-- Progress Section -->
+        <section class="progress-section" id="progress-section" style="display: none;">
+            <div class="progress-container glass">
+                <h2>Your Learning Journey</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Time</h3>
+                        <p id="total-time-stat">0 mins</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Sessions Completed</h3>
+                        <p id="sessions-stat">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Questions Practiced</h3>
+                        <p id="questions-stat">0</p>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Recent Sessions</h3>
+                    <ul id="activity-list">
+                        <li style="color: var(--text-muted)">No practice sessions yet. Start practicing!</li>
+                    </ul>
+                </div>
             </div>
         </section>
     </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>

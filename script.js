@@ -17,6 +17,8 @@ const questions = {
             context: "Mention the hierarchy (ID, Class, Element) and !important."
         },
         {
+
+            
             id: 4,
             text: "What are JavaScript Closures? Provide a practical use case.",
             context: "Discuss lexical scoping and data encapsulation."
@@ -64,6 +66,12 @@ let currentQuestionIndex = 0;
 let timerInterval = null;
 let secondsElapsed = 0;
 
+// Progress State
+let totalTimeSecs = 0;
+let totalSessions = 0;
+let totalQuestionsActivelyPracticed = 0;
+let practiceHistory = [];
+
 // DOM Elements
 const heroSection = document.getElementById('hero-section');
 const dashboardSection = document.getElementById('dashboard-section');
@@ -75,16 +83,22 @@ const questionCounter = document.getElementById('question-counter');
 const categoryLabel = document.getElementById('category-label');
 const timerDisplay = document.getElementById('timer');
 const header = document.getElementById('header');
+const progressSection = document.getElementById('progress-section');
 
 // Navigation Logic
 function showSection(sectionId) {
-    [heroSection, dashboardSection, practiceSection].forEach(s => s.style.display = 'none');
+    [heroSection, dashboardSection, practiceSection, progressSection].forEach(s => {
+        if (s) s.style.display = 'none';
+    });
     if (sectionId === 'hero') {
         heroSection.style.display = 'block';
     } else if (sectionId === 'dashboard') {
         dashboardSection.style.display = 'grid';
     } else if (sectionId === 'practice') {
         practiceSection.style.display = 'block';
+    } else if (sectionId === 'progress') {
+        progressSection.style.display = 'block';
+        updateProgressUI();
     }
     window.scrollTo(0, 0);
 }
@@ -153,6 +167,22 @@ document.getElementById('prev-btn').addEventListener('click', () => {
 document.getElementById('submit-btn').addEventListener('click', () => {
     if (confirm("Are you sure you want to finish this practice session?")) {
         clearInterval(timerInterval);
+        
+        // Save progress
+        totalTimeSecs += secondsElapsed;
+        totalSessions++;
+        const questionsPracticed = currentQuestionIndex + 1;
+        totalQuestionsActivelyPracticed += questionsPracticed;
+        
+        practiceHistory.unshift({
+            category: currentCategory,
+            date: new Date().toLocaleDateString(),
+            duration: secondsElapsed,
+            questions: questionsPracticed
+        });
+        
+        if(practiceHistory.length > 10) practiceHistory.pop();
+
         alert(`Good job! You practiced for ${Math.floor(secondsElapsed / 60)} minutes and ${secondsElapsed % 60} seconds.`);
         showSection('dashboard');
     }
@@ -167,6 +197,42 @@ document.getElementById('nav-dashboard').addEventListener('click', (e) => {
     e.preventDefault();
     showSection('dashboard');
 });
+
+document.getElementById('nav-stats').addEventListener('click', (e) => {
+    e.preventDefault();
+    showSection('progress');
+});
+
+function updateProgressUI() {
+    document.getElementById('total-time-stat').textContent = `${Math.floor(totalTimeSecs / 60)} mins`;
+    document.getElementById('sessions-stat').textContent = totalSessions;
+    document.getElementById('questions-stat').textContent = totalQuestionsActivelyPracticed;
+    
+    const activityList = document.getElementById('activity-list');
+    if (practiceHistory.length === 0) {
+        activityList.innerHTML = '<li style="color: var(--text-muted)">No practice sessions yet. Start practicing!</li>';
+    } else {
+        activityList.innerHTML = '';
+        practiceHistory.forEach(session => {
+            const li = document.createElement('li');
+            const mins = Math.floor(session.duration / 60);
+            const secs = session.duration % 60;
+            const timeStr = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+            
+            li.innerHTML = `
+                <div>
+                    <span class="activity-category">${session.category.toUpperCase()}</span>
+                    <span class="activity-details" style="margin-left: 1rem;">${session.questions} questions</span>
+                </div>
+                <div class="activity-details">
+                    <span>${session.date}</span>
+                    <span style="margin-left: 1rem;">⏳ ${timeStr}</span>
+                </div>
+            `;
+            activityList.appendChild(li);
+        });
+    }
+}
 
 // Header Scroll Effect
 window.addEventListener('scroll', () => {
